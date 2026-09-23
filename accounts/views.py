@@ -60,7 +60,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "You have safely signed out.")
-    return redirect('landing:index')
+    return redirect('index')
 
 
 @login_required

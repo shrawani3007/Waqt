@@ -85,7 +85,7 @@ DB_ENGINE_CHOICE = os.environ.get('DB_ENGINE', 'sqlite').lower()
 
 if DB_ENGINE_CHOICE == 'mysql':
     import pymysql
-    pymysql.install_as_mysqldb()
+    pymysql.install_as_MySQLdb()
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
