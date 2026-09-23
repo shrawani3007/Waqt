@@ -12,6 +12,7 @@ from restaurants.views import (
     owner_dashboard_view,
     owner_table_management_view,
     owner_menu_management_view,
+    owner_kitchen_display_view,
 )
 from reservations.views import owner_reservation_management_view
 from queue_system.views import owner_queue_management_view
@@ -29,6 +30,7 @@ owner_patterns = ([
     path('queue/', owner_queue_management_view, name='queue'),
     path('reservations/', owner_reservation_management_view, name='reservations'),
     path('analytics/', owner_analytics_view, name='analytics'),
+    path('kitchen/', owner_kitchen_display_view, name='kitchen'),
 ], 'owner')
 
 urlpatterns = [
@@ -56,6 +58,7 @@ urlpatterns = [
     path('owner/queue/', owner_queue_management_view, name='owner_queue'),
     path('owner/reservations/', owner_reservation_management_view, name='owner_reservations'),
     path('owner/analytics/', owner_analytics_view, name='owner_analytics'),
+    path('owner/kitchen/', owner_kitchen_display_view, name='owner_kitchen'),
 ]
 
 if settings.DEBUG:

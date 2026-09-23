@@ -473,3 +473,14 @@ def owner_menu_management_view(request):
         'menu_items': menu_items,
         'form': form
     })
+
+@login_required
+def owner_kitchen_display_view(request):
+    if not request.user.is_owner():
+        return HttpResponseForbidden()
+    
+    claim = request.user.restaurant_claims.filter(status='VERIFIED').first()
+    if not claim:
+        return redirect('accounts:owner_register')
+        
+    return render(request, 'owner/kitchen_display.html', {'restaurant': claim.restaurant})

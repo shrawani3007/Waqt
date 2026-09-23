@@ -11,7 +11,8 @@ class QueueEntry(models.Model):
         ('SEATED', 'Seated at Table'),
         ('COMPLETED', 'Completed'),
         ('CANCELLED', 'Cancelled by Customer'),
-        ('EXPIRED', 'Expired / No Show'),
+        ('EXPIRED', 'Expired'),
+        ('NO_SHOW', 'No Show'),
     )
 
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='queue_entries')
@@ -19,6 +20,7 @@ class QueueEntry(models.Model):
     party_size = models.PositiveIntegerField(default=2)
     position = models.PositiveIntegerField(default=1)
     estimated_wait_minutes = models.PositiveIntegerField(default=15)
+    actual_wait_minutes = models.PositiveIntegerField(null=True, blank=True, help_text="Calculated upon being seated")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='WAITING')
     joined_at = models.DateTimeField(default=timezone.now)
     called_at = models.DateTimeField(null=True, blank=True)
