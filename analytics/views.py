@@ -14,7 +14,7 @@ def owner_analytics_view(request):
 
     restaurant = Restaurant.objects.filter(owner=request.user).first()
     if not restaurant:
-        return redirect('accounts:owner_register')
+        return redirect('restaurants:search')
 
     # 1. Calculate MAE for wait time algorithm
     mae_report = calculate_wait_time_mae(restaurant)

@@ -125,7 +125,7 @@ def owner_reservation_management_view(request):
 
     restaurant = Restaurant.objects.filter(owner=request.user).first()
     if not restaurant:
-        return redirect('accounts:owner_register')
+        return redirect('restaurants:search')
 
     if request.method == 'POST':
         res_id = request.POST.get('reservation_id')

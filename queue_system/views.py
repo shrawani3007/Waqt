@@ -132,7 +132,7 @@ def owner_queue_management_view(request):
 
     restaurant = Restaurant.objects.filter(owner=request.user).first()
     if not restaurant:
-        return redirect('accounts:owner_register')
+        return redirect('restaurants:search')
 
     available_tables = restaurant.tables.filter(status='AVAILABLE').order_by('capacity')
     waiting_queue = restaurant.queue_entries.filter(status='WAITING').order_by('joined_at')

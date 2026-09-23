@@ -364,8 +364,8 @@ def owner_dashboard_view(request):
 
     restaurant = Restaurant.objects.filter(owner=request.user).first()
     if not restaurant:
-        messages.warning(request, "Please create a restaurant profile.")
-        return redirect('accounts:owner_register')
+        messages.warning(request, "You haven't claimed a restaurant yet. Search for your restaurant to claim it.")
+        return redirect('restaurants:search')
 
     tables = restaurant.tables.all().order_by('table_number')
     active_queue = restaurant.queue_entries.filter(status__in=['WAITING', 'CALLED']).order_by('position')
@@ -392,7 +392,7 @@ def owner_table_management_view(request):
 
     restaurant = Restaurant.objects.filter(owner=request.user).first()
     if not restaurant:
-        return redirect('accounts:owner_register')
+        return redirect('restaurants:search')
 
     if request.method == 'POST':
         action = request.POST.get('action')
@@ -438,7 +438,7 @@ def owner_menu_management_view(request):
 
     restaurant = Restaurant.objects.filter(owner=request.user).first()
     if not restaurant:
-        return redirect('accounts:owner_register')
+        return redirect('restaurants:search')
 
     if request.method == 'POST':
         action = request.POST.get('action')
@@ -481,6 +481,6 @@ def owner_kitchen_display_view(request):
     
     claim = request.user.restaurant_claims.filter(status='VERIFIED').first()
     if not claim:
-        return redirect('accounts:owner_register')
+        return redirect('restaurants:search')
         
     return render(request, 'owner/kitchen_display.html', {'restaurant': claim.restaurant})
